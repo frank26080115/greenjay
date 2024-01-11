@@ -4,7 +4,7 @@ Brushless motor ESCs (electronic speed controllers) that are running BLHELI_S fi
 
 ![](doc/imgs/greenjay_sizecompare.jpg)
 
-NOTE: when a brushless ESC is being used in brushed mode, the current rating is reduced to about 66%
+NOTE: when a brushless ESC is being used in brushed mode, the current rating is reduced to about 43%
 
 NOTE: disadvantages are: no BEC, no current limiting
 
