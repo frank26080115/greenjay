@@ -2,26 +2,25 @@
 REVISION ?= REV16_7
 
 # targets
-TARGETS      = A B C D E F G H I J K L M N O P Q R S T U V W Z
-MCUS         = H L
-FETON_DELAYS = 0 5 10 15 20 25 30 40 50 70 90
+TARGETS        = A B C D E F G H I J K L M N O P Q R S T U V W Z
+MCUS           = H L
+FETON_DELAYS   = 0 5 10 15 20 25 30 40 50 70 90
+BRUSHED_PHASES = 1 2 3
 
 # example single target
-VARIANT     ?= A
-MCU         ?= H
-FETON_DELAY ?= 5
+VARIANT       ?= A
+MCU           ?= H
+FETON_DELAY   ?= 5
+BRUSHED_PHASE ?= 1
 
 # configure the script to use the wine installation delivered with
 # SimplicityStudio. these wine settings are quite important. if you get
 #  ERROR L250: CODE SIZE LIMIT IN RESTRICTED VERSION EXCEEDED
 # you messed up your simplicity studio install/path settins below:
-SIMPLICITY_PATH ?= ~/local/SimplicityStudio_v4/
-WINE_PREFIX     ?= ~/.config/SimplicityStudio/v4/studio-wine
-WINE_BIN        ?= $(SIMPLICITY_PATH)/support/common/wine/usr/bin/wine
-WINE            = export WINEPREFIX=`realpath $(WINE_PREFIX)`; $(WINE_BIN)
+SIMPLICITY_PATH ?= C:/SiliconLabs/SimplicityStudio/v5
 
 # path to the keil binaries
-KEIL_PATH       = $(SIMPLICITY_PATH)/developer/toolchains/keil_8051/9.53/BIN
+KEIL_PATH       = $(SIMPLICITY_PATH)/developer/toolchains/keil_8051/9.60/BIN
 
 # some directory config
 OUTPUT_DIR     ?= build
@@ -32,12 +31,12 @@ LOG_DIR        ?= $(OUTPUT_DIR)/log
 AX51_BIN = $(KEIL_PATH)/AX51.exe
 LX51_BIN = $(KEIL_PATH)/LX51.exe
 OX51_BIN = $(KEIL_PATH)/Ohx51.exe
-AX51 = $(WINE) $(AX51_BIN)
-LX51 = $(WINE) $(LX51_BIN)
-OX51 = $(WINE) $(OX51_BIN)
+AX51 = $(AX51_BIN)
+LX51 = $(LX51_BIN)
+OX51 = $(OX51_BIN)
 
 # set up flags
-AX51_FLAGS = DEBUG MACRO NOMOD51 COND SYMBOLS PAGEWIDTH(120) PAGELENGTH(65)
+AX51_FLAGS = MACRO NOMOD51 COND DEBUG LIST SYMBOLS PAGEWIDTH(120) PAGELENGTH(65)
 LX51_FLAGS = PAGEWIDTH (120) PAGELENGTH (65)
 
 # set up sources
@@ -45,7 +44,7 @@ ASM_SRC = BLHeli_S.asm
 ASM_INC = $(TARGETS:=.inc) BLHeliBootLoad.inc BLHeliPgm.inc SI_EFM8BB1_Defs.inc SI_EFM8BB2_Defs.inc
 
 # check that wine/simplicity studio is available
-EXECUTABLES = $(WINE_BIN) $(AX51_BIN) $(LX51_BIN) $(OX51_BIN) 
+EXECUTABLES = $(AX51_BIN) $(LX51_BIN) $(OX51_BIN) 
 DUMMYVAR := $(foreach exec, $(EXECUTABLES), \
 		$(if $(wildcard $(exec)),found, \
 		$(error "Could not find $(exec). Make sure to set the correct paths to the simplicity install location")))
@@ -55,23 +54,25 @@ DUMMYVAR := $(foreach exec, $(EXECUTABLES), \
 OBJS = 
 
 define MAKE_OBJ
-OBJS += $(OUTPUT_DIR)/$(1)_$(2)_$(3)_$(REVISION).OBJ
-$(OUTPUT_DIR)/$(1)_$(2)_$(3)_$(REVISION).OBJ : $(ASM_SRC) $(ASM_INC)
+OBJS += $(OUTPUT_DIR)/GJ_$(1)_$(2)_$(3)_$(4)_$(REVISION).OBJ
+$(OUTPUT_DIR)/GJ_$(1)_$(2)_$(3)_$(4)_$(REVISION).OBJ : $(ASM_SRC) $(ASM_INC)
 	$(eval _ESC         := $(1))
 	$(eval _ESC_INT     := $(shell printf "%d" "'${_ESC}"))
 	$(eval _ESCNO       := $(shell echo $$(( $(_ESC_INT) - 65 + 1))))
-        $(eval _MCU_48MHZ   := $(subst L,0,$(subst H,1,$(2))))
+	$(eval _MCU_48MHZ   := $(subst L,0,$(subst H,1,$(2))))
 	$(eval _FETON_DELAY := $(3))
-	$(eval _LOG         := $(LOG_DIR)/$(1)_$(2)_$(3)_$(REVISION).log)
+	$(eval _USE_PHASES  := $(4))
+	$(eval _LOG         := $(LOG_DIR)/GJ_$(1)_$(2)_$(3)_$(REVISION).log)
 	@mkdir -p $(OUTPUT_DIR)
 	@mkdir -p $(LOG_DIR)
 	@echo "AX51 : $$@"
-	@$(AX51) $(ASM_SRC) \
+	$(AX51) $(ASM_SRC) \
 		"DEFINE(ESCNO=$(_ESCNO)) " \
-                "DEFINE(MCU_48MHZ=$(_MCU_48MHZ)) "\
-                "DEFINE(FETON_DELAY=$(_FETON_DELAY)) "\
-                "OBJECT($$@) "\
-                "$(AX51_FLAGS)" >> $(_LOG) 2>&1; test $$$$? -lt 2 || tail $(_LOG)
+		"DEFINE(MCU_48MHZ=$(_MCU_48MHZ)) "\
+		"DEFINE(FETON_DELAY=$(_FETON_DELAY)) "\
+		"DEFINE(USE_PHASES=$(_USE_PHASES)) "\
+		"OBJECT($$@) "\
+		"$(AX51_FLAGS)" >> $(_LOG) 2>&1; test $$$$? -lt 2 || tail $(_LOG)
 
 endef
 
@@ -81,7 +82,7 @@ EFM8_LOAD_BIN  ?= efm8load.py
 EFM8_LOAD_PORT ?= /dev/ttyUSB0
 EFM8_LOAD_BAUD ?= 57600
 
-SINGLE_TARGET_HEX = $(OUTPUT_DIR)/$(VARIANT)_$(MCU)_$(FETON_DELAY)_$(REVISION).HEX
+SINGLE_TARGET_HEX = $(OUTPUT_DIR)/GJ_$(VARIANT)_$(MCU)_$(FETON_DELAY)_$(BRUSHED_PHASE)_$(REVISION).HEX
 
 single_target : $(SINGLE_TARGET_HEX)
 
@@ -92,8 +93,8 @@ all : $$(HEX_TARGETS)
 $(foreach _e,$(TARGETS), \
 	$(foreach _m, $(MCUS), \
 		$(foreach _f, $(FETON_DELAYS), \
-			$(eval $(call MAKE_OBJ,$(_e),$(_m),$(_f))))))
-	
+			$(foreach _p, $(BRUSHED_PHASES), \
+				$(eval $(call MAKE_OBJ,$(_e),$(_m),$(_f),$(_p)))))))
 
 $(OUTPUT_DIR)/%.OMF : $(OUTPUT_DIR)/%.OBJ
 	$(eval LOG         := $(LOG_DIR)/$(basename $(notdir $@)).log)
@@ -122,6 +123,4 @@ clean:
 efm8load: single_target
 	$(EFM8_LOAD_BIN) -p $(EFM8_LOAD_PORT) -b $(EFM8_LOAD_BAUD) -w $(SINGLE_TARGET_HEX)
 
-
 .PHONY: all clean help efm8load
-
