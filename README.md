@@ -7,14 +7,14 @@ Brushless motor ESCs (electronic speed controllers) that are running BLHELI_S fi
 Caveats
 ===
 
-The current rating specified for a brushless ESC won't be true when it is used in brushed mode. Brushless motors have three winding phases, and so brushless ESCs have three half-bridges (half-bridges are a pair of MOSFETs). All of the half-bridges are used for brief moments while the motor rotates, sharing the load. But in brushed mode, two of those MOSFETs will be used 100% of the time, not sharing the load. So the current rating will be lower when in brushed mode. The current rating is reduced to about 43%.
+The current rating specified for a brushless ESC won't be true when it is used in brushed mode. Brushless motors have three winding phases, and so brushless ESCs have three half-bridges (half-bridges are a pair of MOSFETs). All of the half-bridges are used for brief moments while the motor rotates, sharing the load. But in brushed mode, two of those MOSFETs will be used 100% of the time, not sharing the load. So the current rating will be lower when in brushed mode. **The current rating is reduced to about 43% of the original stated rating.**
 
-The highest claimed current rating of a BLHeli_S ESC I've found is 45A, which means in brushed mode, it can handle about 19A. They are still quite cheap.
+The highest claimed current rating of a BLHeli_S ESC I've found is 45A, which means in brushed mode, it can handle about 19A. They are still quite cheap and small.
 
 ![](doc/imgs/example45amp.png)
 ![](doc/imgs/example45amp2.png)
 
-If you need more current, BLHeli32 ESCs can also be converted to run in brushed mode, but it would require AM32 firmware, not Greenjay.
+If you need more current, BLHeli32 ESCs can also be converted to run in brushed mode, but it would require [AM32 firmware](https://github.com/am32-firmware/AM32/), not Greenjay.
 
 Other disadvantages: no BEC, no current limiting
 
@@ -22,12 +22,6 @@ Since this is a bit of an unsupported hack, there's a ton of steps involved, and
 
 INSTRUCTIONS
 ---
-
-Downloads Needed
-===
-
- * Firmware HEX files ([see the hex directory](hex))
- * [BLHeliSuite](https://github.com/4712/BLHeliSuite/releases/tag/16714903)
 
 Tools Needed
 ===
@@ -37,16 +31,22 @@ Tools Needed
    * example product: [USB Linker Compatible with BL32 BLS AM32 Brushless ESC Open Source Speed Control Programming](https://www.amazon.com/Linker-Compatible-Brushless-Control-Programming/dp/B0CCXGFSB3/ref=sr_1_2)
    * example product: [BL32 USB Linker Brushless ESC Open Source Speed Control Programming](https://www.amazon.com/FLASH-HOBBY-Brushless-Control-Programming/dp/B0B6V274JB/ref=sr_1_1)
    * example product: [ESC PC Software Adapter USB Linker Programmer Update for BLHeli Firmware](https://www.amazon.com/ZHIPAIJI-Software-Programmer-Firmware-Multicopter/dp/B09TPFLGBJ/ref=sr_1_3)
-   * If you don't have any of these, then run BLHeliSuite, and it has a `Make Interface` tab that shows you how to use an Arduino to act as a USB linker
-   * For more instructions, see [Oscar Liang's guide](https://oscarliang.com/connect-flash-blheli-s-esc/)
+   * [ESC Programmer USB-C (AM32 / BLHeli_S / BLHeli_32)](https://shop.pearlgrey.io/product/esc-programmer-1-2-usb-c-blheli_s-blheli_32) from Pearl Grey, a fellow robotics hobbyist. This product is based on an Arduino Nano. It is a bit more versatile and can handle 4 ESCs at once.
+   * If you don't have any of these, then run BLHeliSuite, and it has a `Make Interface` tab that shows you how to use an Arduino to act as a USB linker. You still have to buy an Arduino.
+   * For generalized instructions about BLHeli_S, see [Oscar Liang's guide](https://oscarliang.com/connect-flash-blheli-s-esc/)
  * Some way of powering up the ESC
    * this could be just whatever battery that you wanted to use to power your project
- * A brushed motor to test with (or a multimeter)
+ * A brushed motor to test with (or a multimeter), and misc items (wire, etc)
 
-Step 0
+Step 0 - Preprequisits
 ===
 
-Install all the software mentioned, and install the USB driver for whatever USB linker you have.
+Downloads:
+
+ * Firmware HEX files ([see the hex directory](hex))
+ * [BLHeliSuite](https://github.com/4712/BLHeliSuite/releases/tag/16714903)
+
+Install BLHeliSuite, and install the USB driver for whatever USB linker you have.
 
 For your convenience:
 
