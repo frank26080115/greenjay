@@ -29,7 +29,7 @@ Tools Needed
  * RC radio system (a radio transmitter and a receiver), or a servo tester of some sort
  * USB linker for ESCs
    * example Amazon product: [USB Linker Compatible with BL32 BLS AM32 Brushless ESC Open Source Speed Control Programming](https://www.amazon.com/Linker-Compatible-Brushless-Control-Programming/dp/B0CCXGFSB3/ref=sr_1_2) (I personally use this one) ![](doc/imgs/usblinker.png)
-   * [ESC Programmer USB-C (AM32 / BLHeli_S / BLHeli_32)](https://shop.pearlgrey.io/product/esc-programmer-1-2-usb-c-blheli_s-blheli_32) from Pearl Grey, a fellow robotics hobbyist. This product is based on an Arduino Nano. It is a bit more versatile and can handle 4 ESCs at once.
+   * [ESC Programmer USB-C (AM32 / BLHeli_S / BLHeli_32)](https://shop.pearlgrey.io/product/esc-programmer-1-2-usb-c-blheli_s-blheli_32) from Pearl Grey, a fellow robotics hobbyist. This product is based on an Arduino Nano. It is a bit more versatile and can handle 4 ESCs at once. You need to select the `Preassembled with Arduino Nano` option.
    * example Amazon product: [BL32 USB Linker Brushless ESC Open Source Speed Control Programming](https://www.amazon.com/FLASH-HOBBY-Brushless-Control-Programming/dp/B0B6V274JB/ref=sr_1_1) made by Flash Hobby, using CPxxx SiLabs chipset
    * example Amazon product: [ESC PC Software Adapter USB Linker Programmer Update for BLHeli Firmware](https://www.amazon.com/ZHIPAIJI-Software-Programmer-Firmware-Multicopter/dp/B09TPFLGBJ/ref=sr_1_3)
    * If you don't have any of these, then run BLHeliSuite, and it has a `Make Interface` tab that shows you how to use an Arduino to act as a USB linker. You still have to buy an Arduino.
@@ -43,7 +43,6 @@ Step 0 - Prerequisites
 
 Downloads:
 
- * Firmware HEX files ([see the hex directory](hex))
  * [BLHeliSuite](https://github.com/4712/BLHeliSuite/releases/tag/16714903)
 
 Install BLHeliSuite, and install the USB driver for whatever USB linker you have.
@@ -90,11 +89,11 @@ IMPORTANT: You must remember this identification! It is also useful for when you
 Step 2 - Find Correct HEX File
 ===
 
-In the `hex` directory, you will see a bunch of files:
+In [the hex directory](hex), you will see a bunch of files:
 
 ![](doc/imgs/bunchofhexfiles.png)
 
-Here's the name being explained:
+Here's the file name being explained:
 
 ![](doc/imgs/hexfilenamesexplained.png)
 
@@ -109,7 +108,7 @@ Inside BLHeliSuite, click on "Flash Other".
 
 ![](doc/imgs/blhelisuite_flashother.png)
 
-Select the file you want to flash, in this case, pick the one that matches your ESC's identification and use `_1_` for the phase-pin-combination.
+Select the file you want to flash, in this case, pick the one that matches your ESC's identification and use `_1_` for the phase-pin-combination. (the other two combination numbers might be useful in step 6)
 
 ![](doc/imgs/blhelisuite_pickfile.png)
 
@@ -153,6 +152,8 @@ Step 6 - Change the Pins
 If you want to change which two out of the three solder-tabs are being used as the output, then change the file you flash. The phase-pin-combination number of the file name determines which solder-tabs are being used as output. But exactly which one is what combination is a mystery that can only be discovered by experimenting.
 
 ![](doc/imgs/mysterycombos.png)
+
+(personally I prefer to use the outer-most tabs, and not use the center tab, because there's less risk of a short circuit)
 
 Other Notes
 ===
