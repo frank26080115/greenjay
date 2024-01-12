@@ -21,7 +21,7 @@ Other disadvantages: no BEC, no current limiting
 Since this is a bit of an unsupported hack, there's a ton of steps involved, and you will need some tools.
 
 INSTRUCTIONS
----
+===
 
 Tools Needed
 ===
