@@ -1,8 +1,12 @@
 This is my fork of the Greenjay firmware. [Greenjay (link to parent repo)](https://github.com/bird-sanctuary/greenjay/) firmware is a derivative of [BLHeli_S](https://github.com/bitdump/BLHeli) and [Bluejay](https://github.com/bird-sanctuary/bluejay/) firmware. It runs on small ESCs to drive electric motors.
 
-Brushless motor ESCs (electronic speed controllers) that are running BLHELI_S firmware can be converted to run brushed motors. This is great because these ESCs are small, are cheap, they can handle a lot of current, and they can be easily replaced if they break.
+Brushless motor ESCs (electronic speed controllers) that are running BLHeli_S firmware can be converted to run brushed motors. This is great because these ESCs are small, are cheap, they can handle a lot of current, and they can be easily replaced if they break.
 
 ![](doc/imgs/greenjay_sizecompare.jpg)
+
+I need something like this to drive the latest and greatest brushed motors in combat robotics, such as the [JCR Dartbox Viper](https://justcuzrobotics.com/products/dartbox-squared-drive), which is a 22mm gearboxed nerf gun motor with a hilariously high stall current rating of 12A. The next upgrade is the [JCR Dartbox Dragon](https://justcuzrobotics.com/products/dartbox-squared-drive?variant=45099914887477) that can suck down 18A.
+
+[![](doc/imgs/jcr_dartbox_viper.jpg)](https://justcuzrobotics.com/products/dartbox-squared-drive)
 
 Caveats
 ===
