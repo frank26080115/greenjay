@@ -34,6 +34,7 @@ Tools Needed
  * USB linker for ESCs
    * example Amazon product: [USB Linker Compatible with BL32 BLS AM32 Brushless ESC Open Source Speed Control Programming](https://www.amazon.com/Linker-Compatible-Brushless-Control-Programming/dp/B0CCXGFSB3/ref=sr_1_2) (I personally use this one) ![](doc/imgs/usblinker.png)
    * [ESC Programmer USB-C (AM32 / BLHeli_S / BLHeli_32)](https://shop.pearlgrey.io/product/esc-programmer-1-2-usb-c-blheli_s-blheli_32) from Pearl Grey, a fellow robotics hobbyist. This product is based on an Arduino Nano. It is a bit more versatile and can handle 4 ESCs at once. You need to select the `Preassembled with Arduino Nano` option.
+   * [USB Programmer for AM32 BlHeli ESCs](https://justcuzrobotics.com/products/usb-programmer-for-am32-blheli-blheli32-escs) sold by Just Cuz Robotics (JCR), who created the Dartbox motors I mentioned earlier.
    * example Amazon product: [BL32 USB Linker Brushless ESC Open Source Speed Control Programming](https://www.amazon.com/FLASH-HOBBY-Brushless-Control-Programming/dp/B0B6V274JB/ref=sr_1_1) made by Flash Hobby, using CPxxx SiLabs chipset
    * example Amazon product: [ESC PC Software Adapter USB Linker Programmer Update for BLHeli Firmware](https://www.amazon.com/ZHIPAIJI-Software-Programmer-Firmware-Multicopter/dp/B09TPFLGBJ/ref=sr_1_3)
    * If you don't have any of these, then run BLHeliSuite, and it has a `Make Interface` tab that shows you how to use an Arduino to act as a USB linker. You still have to buy an Arduino.
