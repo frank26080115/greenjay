@@ -38,7 +38,7 @@ Tools Needed
    * this could be just whatever battery that you wanted to use to power your project
  * A brushed motor to test with (or a multimeter), and misc items (wire, etc)
 
-Step 0 - Preprequisits
+Step 0 - Prerequisites
 ===
 
 Downloads:
