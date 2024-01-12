@@ -28,10 +28,10 @@ Tools Needed
 
  * RC radio system (a radio transmitter and a receiver), or a servo tester of some sort
  * USB linker for ESCs
-   * example product: [USB Linker Compatible with BL32 BLS AM32 Brushless ESC Open Source Speed Control Programming](https://www.amazon.com/Linker-Compatible-Brushless-Control-Programming/dp/B0CCXGFSB3/ref=sr_1_2)
-   * example product: [BL32 USB Linker Brushless ESC Open Source Speed Control Programming](https://www.amazon.com/FLASH-HOBBY-Brushless-Control-Programming/dp/B0B6V274JB/ref=sr_1_1)
-   * example product: [ESC PC Software Adapter USB Linker Programmer Update for BLHeli Firmware](https://www.amazon.com/ZHIPAIJI-Software-Programmer-Firmware-Multicopter/dp/B09TPFLGBJ/ref=sr_1_3)
+   * example Amazon product: [USB Linker Compatible with BL32 BLS AM32 Brushless ESC Open Source Speed Control Programming](https://www.amazon.com/Linker-Compatible-Brushless-Control-Programming/dp/B0CCXGFSB3/ref=sr_1_2) (I personally use this one) ![](doc/imgs/usblinker.png)
    * [ESC Programmer USB-C (AM32 / BLHeli_S / BLHeli_32)](https://shop.pearlgrey.io/product/esc-programmer-1-2-usb-c-blheli_s-blheli_32) from Pearl Grey, a fellow robotics hobbyist. This product is based on an Arduino Nano. It is a bit more versatile and can handle 4 ESCs at once.
+   * example Amazon product: [BL32 USB Linker Brushless ESC Open Source Speed Control Programming](https://www.amazon.com/FLASH-HOBBY-Brushless-Control-Programming/dp/B0B6V274JB/ref=sr_1_1) made by Flash Hobby, using CPxxx SiLabs chipset
+   * example Amazon product: [ESC PC Software Adapter USB Linker Programmer Update for BLHeli Firmware](https://www.amazon.com/ZHIPAIJI-Software-Programmer-Firmware-Multicopter/dp/B09TPFLGBJ/ref=sr_1_3)
    * If you don't have any of these, then run BLHeliSuite, and it has a `Make Interface` tab that shows you how to use an Arduino to act as a USB linker. You still have to buy an Arduino.
    * For generalized instructions about BLHeli_S, see [Oscar Liang's guide](https://oscarliang.com/connect-flash-blheli-s-esc/)
  * Some way of powering up the ESC
@@ -157,10 +157,15 @@ If you want to change which two out of the three solder-tabs are being used as t
 Other Notes
 ===
 
-While this is a fork, the only change I've made:
+As I said before, this is a fork of the Greenjay firmware, meaning I did not write it originally, and this repo is a copy of it so that I can modify it.
+
+The only change I've made:
 
  * make sure all 3 combinations are automatically built
  * appended `GJ_` to the file names
  * placed all files in the `src` directory
+ * add this instructional readme
 
 I am unlikely to ever update the source code, and it is unlikely that BLHeli_S or the upstream Greenjay repository get updated.
+
+If there are bugs, I will not be able to assist.
