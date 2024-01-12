@@ -4,11 +4,24 @@ Brushless motor ESCs (electronic speed controllers) that are running BLHELI_S fi
 
 ![](doc/imgs/greenjay_sizecompare.jpg)
 
-NOTE: when a brushless ESC is being used in brushed mode, the current rating is reduced to about 43%
+Caveats
+===
 
-NOTE: disadvantages are: no BEC, no current limiting
+The current rating specified for a brushless ESC won't be true when it is used in brushed mode. Brushless motors have three winding phases, and so brushless ESCs have three half-bridges (half-bridges are a pair of MOSFETs). All of the half-bridges are used for brief moments while the motor rotates, sharing the load. But in brushed mode, two of those MOSFETs will be used 100% of the time, not sharing the load. So the current rating will be lower when in brushed mode. The current rating is reduced to about 43%.
+
+The highest claimed current rating of a BLHeli_S ESC I've found is 45A, which means in brushed mode, it can handle about 19A. They are still quite cheap.
+
+![](doc/imgs/example45amp.png)
+![](doc/imgs/example45amp2.png)
+
+If you need more current, BLHeli32 ESCs can also be converted to run in brushed mode, but it would require AM32 firmware, not Greenjay.
+
+Other disadvantages: no BEC, no current limiting
 
 Since this is a bit of an unsupported hack, there's a ton of steps involved, and you will need some tools.
+
+INSTRUCTIONS
+---
 
 Downloads Needed
 ===
