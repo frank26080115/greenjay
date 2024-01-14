@@ -1,6 +1,6 @@
 This is my fork of the Greenjay firmware. [Greenjay (link to parent repo)](https://github.com/bird-sanctuary/greenjay/) firmware is a derivative of [BLHeli_S](https://github.com/bitdump/BLHeli) and [Bluejay](https://github.com/bird-sanctuary/bluejay/) firmware. It runs on small ESCs to drive electric motors.
 
-Brushless motor ESCs (electronic speed controllers) that are running BLHeli_S firmware can be converted to run brushed motors. This is great because these ESCs are small, are cheap, they can handle a lot of current, and they can be easily replaced if they break.
+Brushless motor ESCs (electronic speed controllers) that are running BLHeli_S firmware can be converted to run brushed motors. This is great because these ESCs are small, are cheap, they can handle a lot of current, and they can be easily replaced if they break. Here are some examples size comparisons, along with cost and capability:
 
 ![](doc/imgs/greenjay_sizecompare.jpg)
 
@@ -14,9 +14,6 @@ Caveats
 The current rating specified for a brushless ESC won't be true when it is used in brushed mode. Brushless motors have three winding phases, and so brushless ESCs have three half-bridges (half-bridges are a pair of MOSFETs). All of the half-bridges are used for brief moments while the motor rotates, sharing the load. But in brushed mode, two of those MOSFETs will be used 100% of the time, not sharing the load. So the current rating will be lower when in brushed mode. **The current rating is reduced to about 43% of the original stated rating.**
 
 The highest claimed current rating of a BLHeli_S ESC I've found is 45A, which means in brushed mode, it can handle about 19A. They are still quite cheap and small.
-
-![](doc/imgs/example45amp.png)
-![](doc/imgs/example45amp2.png)
 
 If you need more current, BLHeli32 ESCs can also be converted to run in brushed mode, but it would require [AM32 firmware](https://github.com/am32-firmware/AM32/), not Greenjay.
 
